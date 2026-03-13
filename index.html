@@ -120,19 +120,23 @@ return;
 }
 
 
-if(command==="/clear"){
+if(command === "/clear"){
 
 if(!isAdmin){
 alert("Admin only");
 return;
 }
 
-await remove(messagesRef);
+remove(messagesRef).then(() => {
 
 push(messagesRef,{
 name:"SYSTEM",
 color:"#ff0000",
-text:"Chat cleared"
+text:"Chat cleared by admin"
+});
+
+document.getElementById("chat").innerHTML = "";
+
 });
 
 return;
