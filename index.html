@@ -14,7 +14,10 @@
             text-align: center;
             padding-top: 15vh;
             margin: 0;
+            /* Strong shadow to ensure text is visible on any background */
             text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0px 3px 5px rgba(0,0,0,0.8);
+            /* Fallback color in case an image fails to load */
+            background-color: #222; 
         }
         h1 { font-size: 3.5rem; }
         p { font-size: 1.5rem; }
@@ -23,24 +26,31 @@
 <body>
 
     <h1>Welcome to My Site</h1>
-    <p>Now pulling from the backgrounds folder!</p>
+    <p>Every refresh brings a new look!</p>
 
     <script>
-        // Your list of filenames stays exactly the same
         const backgrounds = [
+            // GIFs
             'rainbowstr.gif', '646.GIF', '336.GIF', '062.GIF', '1020.GIF',
             '114.GIF', '1019.GIF', '087.GIF', '083.GIF', '067.GIF',
             '650.GIF', '1008.GIF', '061.GIF', '058.GIF', '024.GIF',
-            'qcu50119.jpg', 'pasta1.jpg', 'coins.jpg', 'cio61007.jpg', 'ahm60071.jpg',
-            'bubblespurplebg.jpg', 'water1_ripple.jpg', 'SD175.JPG', 'OPOCEAN2.jpg', 'qhk50103.jpg',
-            'pdj50131.gif', 'Painting.png', 'PLANTS3.JPG', 'giraffe195.jpg', 'WINDOW14.jpg', 
-            'BUILD233.jpg', 'BUILD063.jpg', 'EARTH_C.JPG', 'manyfish.jpg', 'qcu50122.jpg'
+            'pdj50131.gif',
+
+            // JPGs (Checked for exact capitalization)
+            'qcu50119.jpg', 'pasta1.jpg', 'coins.jpg', 'cio61007.jpg', 
+            'ahm60071.jpg', 'bubblespurplebg.jpg', 'water1_ripple.jpg', 
+            'SD175.JPG', 'OPOCEAN2.jpg', 'qhk50103.jpg', 'PLANTS3.JPG', 
+            'giraffe195.jpg', 'WINDOW14.jpg', 'BUILD233.jpg', 'BUILD063.jpg', 
+            'EARTH_C.JPG', 'manyfish.jpg', 'qcu50122.jpg',
+
+            // PNGs
+            'Painting.png'
         ];
 
         const randomIndex = Math.floor(Math.random() * backgrounds.length);
         const selectedImage = backgrounds[randomIndex];
 
-        // NEW STEP: We add 'backgrounds/' before the filename so the browser finds it
+        // Apply the background from the backgrounds folder
         document.body.style.backgroundImage = `url('backgrounds/${selectedImage}')`;
     </script>
 
