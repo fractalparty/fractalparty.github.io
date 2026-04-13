@@ -18,8 +18,15 @@
             text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0px 3px 5px rgba(0,0,0,0.8);
             /* Fallback color in case an image fails to load */
             background-color: #222; 
+            
         }
-        h1 { font-size: 3.5rem; }
+
+        /* Makes the cursor change when hovering over the title */
+        h1 { 
+            font-size: 3.5rem; 
+            cursor: help;
+        }
+
         p { font-size: 1.5rem; }
     </style>
 </head>
@@ -29,25 +36,29 @@
 
     <script>
         const backgrounds = [
-            // GIFs
-            'rainbowstr.gif', '646.GIF', '336.GIF', '062.GIF', '1020.GIF',
-            '114.GIF', '1019.GIF', '087.GIF', '083.GIF', '067.GIF',
-            '650.GIF', '1008.GIF', '061.GIF', '058.GIF', '024.GIF',
-            'pdj50131.gif',
+            // GIFs 
+            '024.GIF', '058.GIF', '061.GIF', '062.GIF', '067.GIF', 
+            '083.GIF', '087.GIF', '1008.GIF', '1019.GIF', '1020.GIF', 
+            '114.GIF', '336.GIF', '646.GIF', '650.GIF',
+            // Lowercase GIFs
+            'pdj50131.gif', 'pdj50138.gif', 'rainbowstr.gif',
 
-            // JPGs
-            'qcu50119.jpg', 'pasta1.jpg', 'coins.jpg', 'cio61007.jpg', 
-            'ahm60071.jpg', 'bubblespurplebg.jpg', 'water1_ripple.jpg', 
-            'SD175.JPG', 'OPOCEAN2.jpg', 'qhk50103.jpg', 'PLANTS3.JPG', 
-            'giraffe195.jpg', 'WINDOW14.jpg', 'BUILD233.jpg', 'BUILD063.jpg', 
-            'EARTH_C.JPG', 'manyfish.jpg', 'qcu50122.jpg',
+            // PNGs 
+            'BUILD063.png', 'BUILD233.png', 'Painting.png', 'WINDOW14.png',
 
-            // PNGs
-            'Painting.png'
+            // JPGs 
+            'EARTH_C.JPG', 'OPOCEAN2.JPG', 'PLANTS3.JPG', 'SD175.JPG',
+            'ahm60071.jpg', 'bubblespurplebg.jpg', 'cio61007.jpg', 
+            'coins.jpg', 'giraffe195.jpg', 'manyfish.jpg', 'pasta1.jpg',
+            'pdk50102.jpg', 'qcu50119.jpg', 'qcu50122.jpg', 'qhk50103.jpg', 
+            'water1_ripple.jpg'
         ];
 
         const randomIndex = Math.floor(Math.random() * backgrounds.length);
         const selectedImage = backgrounds[randomIndex];
+
+        // Debugging
+        console.log("Current background: " + selectedImage);
 
         // Apply the background from the backgrounds folder
         document.body.style.backgroundImage = `url('backgrounds/${selectedImage}')`;
