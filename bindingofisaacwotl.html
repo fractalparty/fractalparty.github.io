@@ -4,19 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Party World - Game</title>
-  <base href="https://cdn.jsdelivr.net/gh/bubbls/ugss@main/boilambeternal/">
   <style>
     html, body {
       margin: 0; padding: 0;
       background: black; overflow: hidden;
       height: 100%; width: 100%;
-      font-family: 'Brush Script MT', cursive; /* Match your site theme */
+      font-family: 'Brush Script MT', cursive;
     }
 
-    /* --- HAMBURGER MENU (Copied from index) --- */
+    /* --- HAMBURGER MENU --- */
     .hamburger {
         position: fixed; top: 20px; left: 20px;
-        z-index: 2000; /* Higher than game */
+        z-index: 2000;
         cursor: pointer; display: flex;
         flex-direction: column; gap: 5px;
         background: rgba(0, 0, 0, 0.7);
@@ -28,7 +27,7 @@
     .side-menu {
         height: 100%; width: 250px; position: fixed;
         z-index: 1999; top: 0; left: -250px;
-        background-color: rgba(0, 0, 0, 0.8); /* Darker for better visibility over game */
+        background-color: rgba(0, 0, 0, 0.8);
         transition: 0.5s; padding-top: 80px;
     }
     .side-menu.active { left: 0; }
@@ -39,7 +38,6 @@
     }
     .side-menu a:hover { color: #ff00ff; }
 
-    /* --- GAME STYLES --- */
     #flash-container {
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
@@ -60,21 +58,21 @@
   </div>
 
   <div id="indexMenu" class="side-menu">
-      <a href="index.html">← Back Home</a>
+      <a href="index.html">Home</a>
       <a href="game.html">Flash Game</a>
-      <a href="gallery.html">Gallery</a>
   </div>
 
   <div id="loading-text">Loading game... 0%</div>
   <div id="flash-container"></div>
 
   <script>
-    /* Menu Toggle Logic */
     function toggleMenu() {
         document.getElementById("indexMenu").classList.toggle("active");
     }
 
-    /* Original Game Script Logic */
+    // This is where we moved the external URL to
+    const GAME_BASE_URL = "https://cdn.jsdelivr.net/gh/bubbls/ugss@main/boilambeternal/";
+
     const container = document.getElementById("flash-container");
     const loadingText = document.getElementById("loading-text");
 
@@ -95,7 +93,8 @@
             resolve(URL.createObjectURL(mergedBlob));
             return;
           }
-          fetch(fileParts[i]).then(r => {
+          // We add the GAME_BASE_URL here specifically for the game files
+          fetch(GAME_BASE_URL + fileParts[i]).then(r => {
             const len = r.headers.get('content-length');
             if (len) totalSize += parseInt(len);
             return r.arrayBuffer();
