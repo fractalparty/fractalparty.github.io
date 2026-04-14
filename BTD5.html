@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Party World - BTD5</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      background: black; overflow: hidden;
+      height: 100%; width: 100%;
+      font-family: 'Brush Script MT', cursive;
+    }
+
+    /* --- HAMBURGER MENU --- */
+    .hamburger {
+        position: fixed; top: 20px; left: 20px;
+        z-index: 2000;
+        cursor: pointer; display: flex;
+        flex-direction: column; gap: 5px;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 10px; border-radius: 5px;
+        border: 1px solid white;
+    }
+    .hamburger span { width: 30px; height: 4px; background: white; }
+
+    .side-menu {
+        height: 100%; width: 250px; position: fixed;
+        z-index: 1999; top: 0; left: -250px;
+        background-color: rgba(0, 0, 0, 0.8);
+        transition: 0.5s; padding-top: 80px;
+    }
+    .side-menu.active { left: 0; }
+    .side-menu a {
+        padding: 15px 30px; text-decoration: none;
+        font-size: 1.1rem; color: #fff; display: block;
+        text-shadow: 2px 2px #000;
+    }
+    .side-menu a:hover { color: #ff00ff; }
+
+    #flash-container {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: black; z-index: 1;
+    }
+    #loading-text {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff; font-family: Arial; z-index: 1000;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle@0.2.0-nightly.2025.10.2/ruffle.min.js"></script>
+</head>
+<body>
+
+  <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+  </div>
+
+  <div id="indexMenu" class="side-menu">
+      <a href="index.html">Home</a>
+      <a href="game.html">Flash Game</a>
+  </div>
+
+  <div id="loading-text">Loading game... 0%</div>
+  <div id="flash-container"></div>
+
+  <script>
+    function toggleMenu() {
+        document.getElementById("indexMenu").classList.toggle("active");
+    }
+
+    // This is where we moved the external URL to
+    const GAME_BASE_URL = "https://cdn.jsdelivr.net/gh/bubbls/ugss@main/boilambeternal/";
+
+    const container = document.getElementById("flash-container");
+    const loadingText = document.getElementById("loading-text");
+
+    function mergeSWFParts(fileParts) {
+      return new Promise((resolve, reject) => {
+        let buffers = [];
+        let totalSize = 0;
+        let loadedSize = 0;
+        function updateProgress() {
+          if (totalSize > 0) {
+            const pct = Math.round((loadedSize / totalSize) * 100);
+            if (loadingText) loadingText.textContent = `Loading game... ${pct}%`;
+          }
+        }
+        function fetchPart(i) {
+          if (i >= fileParts.length) {
+            let mergedBlob = new Blob(buffers, { type: 'application/x-shockwave-flash' });
+            resolve(URL.createObjectURL(mergedBlob));
+            return;
+          }
+          // We add the GAME_BASE_URL here specifically for the game files
+          fetch(GAME_BASE_URL + fileParts[i]).then(r => {
+            const len = r.headers.get('content-length');
+            if (len) totalSize += parseInt(len);
+            return r.arrayBuffer();
+          }).then(data => {
+            buffers.push(data);
+            loadedSize += data.byteLength;
+            updateProgress();
+            fetchPart(i + 1);
+          }).catch(reject);
+        }
+        fetchPart(0);
+      });
+    }
+
+    function getSWFParts(baseFile, start, end) {
+      let arr = [];
+      for (let i = start; i <= end; i++) { arr.push(`${baseFile}.part${i}`); }
+      return arr;
+    }
+
+    function resizeGame() {
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      const aspectRatio = 4 / 3;
+      let width = windowWidth;
+      let height = windowWidth / aspectRatio;
+      if (height > windowHeight) {
+        height = windowHeight;
+        width = height * aspectRatio;
+      }
+      container.style.width = `${Math.floor(width)}px`;
+      container.style.height = `${Math.floor(height)}px`;
+    }
+
+    window.addEventListener("resize", resizeGame);
+    window.addEventListener("DOMContentLoaded", () => {
+      resizeGame();
+      const swfParts = getSWFParts('tboiwotl-v1.666.swf', 1, 3); 
+      mergeSWFParts(swfParts).then(swfUrl => {
+        const ruffle = window.RufflePlayer?.newest() || window.RufflePlayer?.createPlayer();
+        if (ruffle && container) {
+          const player = ruffle.createPlayer();
+          player.style.width = "100%";
+          player.style.height = "100%";
+          container.appendChild(player);
+          player.load(swfUrl).then(() => { if (loadingText) loadingText.remove(); });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
