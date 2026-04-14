@@ -54,6 +54,11 @@
 
   <div id="indexMenu" class="side-menu">
       <a href="index.html">Home</a>
+      <a href="bindingofisaacwotl.html">The Binding of Isaac</a>
+      <a href="BTD5.html">BTD5</a>
+      <a href="temp.html">template</a>
+      <a href="temp.html">template</a>
+      <a href="temp.html">template</a>
       </div>
 
   <div id="flash-container"></div>
