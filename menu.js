@@ -1,17 +1,10 @@
 // This contains the HTML for your menu
 const menuHTML = `
-    <div class="hamburger" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    <div id="indexMenu" class="side-menu">
-        <a href="/">Home</a>
-        <a href="/bindingofisaacwotl.html">Binding of Isaac</a>
-        <a href="/BTD5.html">BTD5</a>
-        <a href="/Gladihoppers.html">Gladihoppers</a>
-        <a href="/links.html">Soon</a>
-    </div>
+  ...
+  <a href="/bindingofisaacwotl.html">Binding of Isaac</a>
+  <a href="/BTD5.html">BTD5</a>
+  <a href="/Gladihoppers.html">Gladihoppers</a>
+  <a href="/cookieclicker.html">Cookie Clicker</a> ...
 `;
 
 // Injects the menu into the page
