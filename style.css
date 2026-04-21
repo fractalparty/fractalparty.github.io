@@ -1,0 +1,29 @@
+/* Shared Menu Styles */
+.hamburger {
+    position: fixed; top: 20px; left: 20px;
+    z-index: 10001; cursor: pointer;
+    display: flex; flex-direction: column; gap: 5px;
+    background: rgba(0, 0, 0, 0.5); padding: 10px;
+    border-radius: 5px;
+}
+.hamburger span { display: block; width: 30px; height: 4px; background-color: white; transition: 0.3s; }
+
+.side-menu {
+    height: 100%; width: 250px; position: fixed;
+    z-index: 10000; top: 0; left: -250px;
+    background-color: rgba(0, 0, 0, 0.6); 
+    overflow-x: hidden; transition: 0.5s;
+    padding-top: 80px; text-align: left;
+    backdrop-filter: blur(5px);
+}
+.side-menu.active { left: 0; }
+.side-menu a {
+    padding: 15px 30px; text-decoration: none;
+    font-size: 1.1rem; color: #fff; display: block;
+    transition: 0.3s; border-bottom: 1px dotted rgba(255,255,255,0.2);
+    font-family: 'Brush Script MT', cursive;
+}
+.side-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ff00ff; padding-left: 45px;
+}
