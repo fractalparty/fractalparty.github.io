@@ -1,26 +1,34 @@
-// This contains the HTML for your menu
+// menu.js
 const menuHTML = `
-  ...
-  <a href="/bindingofisaacwotl.html">Binding of Isaac</a>
-  <a href="/BTD5.html">BTD5</a>
-  <a href="/Gladihoppers.html">Gladihoppers</a>
-  <a href="/cookieclicker.html">Cookie Clicker</a> ...
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div id="indexMenu" class="side-menu">
+        <a href="/">Home</a>
+        <a href="/bindingofisaacwotl.html">Binding of Isaac</a>
+        <a href="/BTD5.html">BTD5</a>
+        <a href="/Gladihoppers.html">Gladihoppers</a>
+        <a href="/cookieclicker.html">Cookie Clicker</a>
+    </div>
 `;
 
-// Injects the menu into the page
+// Add the menu to the very top of the <body>
 document.body.insertAdjacentHTML('afterbegin', menuHTML);
 
-// Menu toggle logic
 function toggleMenu() {
     const menu = document.getElementById("indexMenu");
     menu.classList.toggle("active");
 }
 
-// Close menu if user clicks outside
+// Close menu if clicking outside
 document.addEventListener('click', function(event) {
     const menu = document.getElementById("indexMenu");
     const btn = document.querySelector('.hamburger');
-    if (menu && !menu.contains(event.target) && btn && !btn.contains(event.target)) {
-        menu.classList.remove("active");
+    if (menu.classList.contains('active')) {
+        if (!menu.contains(event.target) && !btn.contains(event.target)) {
+            menu.classList.remove("active");
+        }
     }
 });
