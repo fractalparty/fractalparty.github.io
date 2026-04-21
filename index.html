@@ -4,144 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Party World</title>
+    <link rel="stylesheet" href="/style.css">
     <style>
         body {
-            background-size: auto;
-            background-repeat: repeat;
-            background-attachment: fixed;
-            color: white;
-            font-family: 'Brush Script MT', cursive;
-            text-align: center;
-            padding-top: 15vh;
-            margin: 0;
-            /* Strong shadow for visibility */
+            background-size: auto; background-repeat: repeat; background-attachment: fixed;
+            color: white; font-family: 'Brush Script MT', cursive;
+            text-align: center; padding-top: 15vh; margin: 0;
             text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0px 3px 5px rgba(0,0,0,0.8);
             background-color: #222; 
         }
-
-        h1 { 
-            font-size: 3.5rem; 
-            cursor: help;
-        }
-
-        /* --- HAMBURGER MENU BUTTON --- */
-        .hamburger {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1001; /* Above the overlay */
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 5px;
-        }
-
-        .hamburger span {
-            display: block;
-            width: 30px;
-            height: 4px;
-            background-color: white;
-            transition: 0.3s;
-        }
-
-        /* --- SLIDING INDEX POPUP --- */
-        .side-menu {
-            height: 100%;
-            width: 250px; /* Width of the menu */
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: -250px; /* Hidden off-screen to the left */
-            /* 60% transparent black */
-            background-color: rgba(0, 0, 0, 0.6); 
-            overflow-x: hidden;
-            transition: 0.5s; /* Slide speed */
-            padding-top: 80px;
-            text-align: left;
-            backdrop-filter: blur(5px); /* Optional: adds a nice glass effect */
-        }
-
-        .side-menu a {
-            padding: 15px 30px;
-            text-decoration: none;
-            font-size: 1.1rem;
-            color: #fff;
-            display: block;
-            transition: 0.3s;
-            border-bottom: 1px dotted rgba(255,255,255,0.2);
-        }
-
-        .side-menu a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #ff00ff; /* Party Pink */
-            padding-left: 45px;
-        }
-
-        /* Logic for when the menu is open */
-        .side-menu.active {
-            left: 0;
-        }
-
+        h1 { font-size: 3.5rem; cursor: help; }
     </style>
 </head>
 <body>
 
-    <div class="hamburger" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-
-    <div id="indexMenu" class="side-menu">
-        <a href="index.html">Home</a>
-        <a href="/bindingofisaacwotl.html">Binding of Isaac</a>
-        <a href="/BTD5.html">BTD5</a>
-        <a href="/Gladihoppers.html">Gladihoppers</a>
-        <a href="links.html">soon</a>
-    </div>
-
     <h1>Party World</h1>
 
     <script>
-        // --- Background Logic ---
-        const backgrounds = [
-            '024.GIF', '058.GIF', '061.GIF', '062.GIF', '067.GIF', 
-            '083.GIF', '087.GIF', '1008.GIF', '1019.GIF', '1020.GIF', 
-            '114.GIF', '336.GIF', '646.GIF', '650.GIF',
-            'pdj50131.gif', 'pdj50138.gif', 'rainbowstr.gif',
-            'BUILD063.png', 'BUILD233.png', 'Painting.png', 'WINDOW14.png',
-            'EARTH_C.JPG', 'OPOCEAN2.JPG', 'PLANTS3.JPG', 'SD175.JPG',
-            'ahm60071.jpg', 'bubblespurplebg.jpg', 'cio61007.jpg', 
-            'coins.jpg', 'giraffe195.jpg', 'manyfish.jpg', 'pasta1.jpg',
-            'pdk50102.jpg', 'qcu50119.jpg', 'qcu50122.jpg', 'qhk50103.jpg', 
-            'water1_ripple.jpg'
-        ];
-
-        const randomIndex = Math.floor(Math.random() * backgrounds.length);
-        const selectedImage = backgrounds[randomIndex];
-
-        console.log("Current background: " + selectedImage);
+        // Background Logic stays here
+        const backgrounds = ['024.GIF', '058.GIF', '061.GIF', '062.GIF', '067.GIF', '083.GIF', '087.GIF', '1008.GIF', '1019.GIF', '1020.GIF', '114.GIF', '336.GIF', '646.GIF', '650.GIF', 'pdj50131.gif', 'pdj50138.gif', 'rainbowstr.gif', 'BUILD063.png', 'BUILD233.png', 'Painting.png', 'WINDOW14.png', 'EARTH_C.JPG', 'OPOCEAN2.JPG', 'PLANTS3.JPG', 'SD175.JPG', 'ahm60071.jpg', 'bubblespurplebg.jpg', 'cio61007.jpg', 'coins.jpg', 'giraffe195.jpg', 'manyfish.jpg', 'pasta1.jpg', 'pdk50102.jpg', 'qcu50119.jpg', 'qcu50122.jpg', 'qhk50103.jpg', 'water1_ripple.jpg'];
+        const selectedImage = backgrounds[Math.floor(Math.random() * backgrounds.length)];
         document.body.style.backgroundImage = `url('backgrounds/${selectedImage}')`;
-
-        // --- Menu Logic ---
-        function toggleMenu() {
-            const menu = document.getElementById("indexMenu");
-            // Toggle the 'active' class to slide in/out
-            menu.classList.toggle("active");
-        }
-
-        // Close menu if user clicks anywhere on the body (outside menu)
-        document.addEventListener('click', function(event) {
-            const menu = document.getElementById("indexMenu");
-            const btn = document.querySelector('.hamburger');
-            if (!menu.contains(event.target) && !btn.contains(event.target)) {
-                menu.classList.remove("active");
-            }
-        });
     </script>
 
+    <script src="/menu.js"></script>
 </body>
 </html>
