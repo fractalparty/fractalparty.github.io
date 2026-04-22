@@ -1,21 +1,35 @@
+/* style.css */
+
 .hamburger {
-    position: fixed; top: 20px; left: 20px;
-    z-index: 999999; cursor: pointer;
-    display: flex; flex-direction: column; gap: 5px;
-    background: rgba(0, 0, 0, 0.7); padding: 10px;
-    border-radius: 5px; border: 1px solid white;
+    position: fixed !important; 
+    top: 20px !important; 
+    left: 20px !important;
+    /* We use a massive number here to beat the game engines */
+    z-index: 2147483647 !important; 
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.8) !important;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid white !important;
 }
-.hamburger span { display: block; width: 30px; height: 4px; background: white; }
+
 .side-menu {
-    height: 100%; width: 250px; position: fixed;
-    z-index: 999998; top: 0; left: -250px;
-    background-color: rgba(0, 0, 0, 0.9); transition: 0.5s;
-    padding-top: 80px; backdrop-filter: blur(10px);
+    height: 100% !important;
+    width: 250px !important;
+    position: fixed !important;
+    /* One level lower than the button but still higher than the game */
+    z-index: 2147483646 !important; 
+    top: 0;
+    left: -250px;
+    background-color: rgba(0, 0, 0, 0.9) !important; 
+    transition: 0.5s;
+    padding-top: 80px;
+    backdrop-filter: blur(10px);
 }
-.side-menu.active { left: 0; }
-.side-menu a {
-    padding: 15px 30px; text-decoration: none;
-    font-size: 1.2rem; color: #fff; display: block;
-    font-family: 'Brush Script MT', cursive;
+
+.side-menu.active {
+    left: 0 !important;
 }
-.side-menu a:hover { color: #ff00ff; background: rgba(255,255,255,0.1); }
