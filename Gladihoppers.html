@@ -7,41 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Party World - Gladihoppers</title>
 
+    <link rel="stylesheet" href="/style.css?v=1">
+
     <style>
         html, body {
             margin: 0; padding: 0;
             background: black; overflow: hidden;
             height: 100%; width: 100%;
-            font-family: 'Brush Script MT', cursive;
         }
 
-        /* --- PARTY WORLD NAVIGATION --- */
-        .hamburger {
-            position: fixed; top: 20px; left: 20px;
-            z-index: 2001; cursor: pointer;
-            display: flex; flex-direction: column; gap: 5px;
-            background: rgba(0, 0, 0, 0.7); padding: 10px;
-            border-radius: 5px; border: 1px solid white;
-        }
-        .hamburger span { display: block; width: 30px; height: 4px; background: white; }
-
-        .side-menu {
-            height: 100%; width: 250px; position: fixed;
-            z-index: 2000; top: 0; left: -250px;
-            background-color: rgba(0, 0, 0, 0.6); 
-            transition: 0.5s; padding-top: 80px;
-            backdrop-filter: blur(5px);
-        }
-        .side-menu.active { left: 0; }
-        .side-menu a {
-            padding: 15px 30px; text-decoration: none;
-            font-size: 1.1rem; color: #fff; display: block;
-            text-shadow: 2px 2px #000;
-        }
-        .side-menu a:hover { color: #ff00ff; }
-
-        /* Unity likes to take up the whole screen */
+        /* Unity specific styles */
         #unity-container { width: 100%; height: 100%; }
+
+        /* Force the shared menu to stay on top of Unity */
+        .hamburger { z-index: 999999 !important; position: fixed !important; }
+        .side-menu { z-index: 999998 !important; position: fixed !important; }
     </style>
 
     <script>
@@ -54,7 +34,6 @@
             debug: true
         };
     </script>
-
     <script src="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/merge.js"></script>
     <script>
         window.config = {
@@ -78,23 +57,8 @@
 </head>
 <body>
 
-    <div class="hamburger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-    </div>
-
-    <div id="indexMenu" class="side-menu">
-        <a href="https://fractalparty-github-io.vercel.app/index.html">Home</a>
-        <a href="https://fractalparty-github-io.vercel.app/bindingofisaacwotl">Binding of Isaac</a>
-        <a href="https://fractalparty-github-io.vercel.app/BTD6.html">BTD6</a>
-        <a href="https://fractalparty-github-io.vercel.app/Gladihoppers.html">Gladihoppers</a>
-    </div>
-
     <script src="patch/js/poki-master-loader.js"></script>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById("indexMenu").classList.toggle("active");
-        }
-    </script>
+    <script src="/menu.js?v=1"></script>
 </body>
 </html>
