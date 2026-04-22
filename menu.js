@@ -1,9 +1,6 @@
-// menu.js
 const menuHTML = `
     <div class="hamburger" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
     </div>
     <div id="indexMenu" class="side-menu">
         <a href="/">Home</a>
@@ -14,21 +11,16 @@ const menuHTML = `
     </div>
 `;
 
-// Add the menu to the very top of the <body>
 document.body.insertAdjacentHTML('afterbegin', menuHTML);
 
 function toggleMenu() {
-    const menu = document.getElementById("indexMenu");
-    menu.classList.toggle("active");
+    document.getElementById("indexMenu").classList.toggle("active");
 }
 
-// Close menu if clicking outside
-document.addEventListener('click', function(event) {
+document.addEventListener('click', (e) => {
     const menu = document.getElementById("indexMenu");
     const btn = document.querySelector('.hamburger');
-    if (menu.classList.contains('active')) {
-        if (!menu.contains(event.target) && !btn.contains(event.target)) {
-            menu.classList.remove("active");
-        }
+    if (menu.classList.contains('active') && !menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.classList.remove("active");
     }
 });
