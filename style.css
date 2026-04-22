@@ -1,59 +1,21 @@
-/* style.css */
-
-/* The Burger Button */
 .hamburger {
-    position: fixed; /* Stays in place even when scrolling */
-    top: 20px;
-    left: 20px;
-    z-index: 999999; 
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid white;
+    position: fixed; top: 20px; left: 20px;
+    z-index: 999999; cursor: pointer;
+    display: flex; flex-direction: column; gap: 5px;
+    background: rgba(0, 0, 0, 0.7); padding: 10px;
+    border-radius: 5px; border: 1px solid white;
 }
-
-.hamburger span {
-    display: block;
-    width: 30px;
-    height: 4px;
-    background-color: white;
-}
-
-/* The Side Menu */
+.hamburger span { display: block; width: 30px; height: 4px; background: white; }
 .side-menu {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    z-index: 999998;
-    top: 0;
-    left: -250px; /* Starts hidden off-screen */
-    background-color: rgba(0, 0, 0, 0.85); 
-    transition: 0.5s;
-    padding-top: 80px;
-    backdrop-filter: blur(10px);
-    text-align: left; /* Keep text left-aligned inside menu */
+    height: 100%; width: 250px; position: fixed;
+    z-index: 999998; top: 0; left: -250px;
+    background-color: rgba(0, 0, 0, 0.9); transition: 0.5s;
+    padding-top: 80px; backdrop-filter: blur(10px);
 }
-
-/* When the menu has the 'active' class, slide it in */
-.side-menu.active {
-    left: 0;
-}
-
+.side-menu.active { left: 0; }
 .side-menu a {
-    padding: 15px 30px;
-    text-decoration: none;
-    font-size: 1.5rem;
-    color: #fff;
-    display: block;
+    padding: 15px 30px; text-decoration: none;
+    font-size: 1.2rem; color: #fff; display: block;
     font-family: 'Brush Script MT', cursive;
-    border-bottom: 1px dotted rgba(255,255,255,0.2);
 }
-
-.side-menu a:hover {
-    color: #ff00ff;
-    background: rgba(255,255,255,0.1);
-}
+.side-menu a:hover { color: #ff00ff; background: rgba(255,255,255,0.1); }
