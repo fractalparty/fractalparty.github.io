@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Party World - Binding of Isaac</title>
+
+  <link rel="stylesheet" href="/style.css?v=1">
+
   <style>
     html, body {
       margin: 0; padding: 0;
@@ -12,32 +15,7 @@
       font-family: 'Brush Script MT', cursive;
     }
 
-    /* --- HAMBURGER MENU --- */
-    .hamburger {
-        position: fixed; top: 20px; left: 20px;
-        z-index: 2000;
-        cursor: pointer; display: flex;
-        flex-direction: column; gap: 5px;
-        background: rgba(0, 0, 0, 0.7);
-        padding: 10px; border-radius: 5px;
-        border: 1px solid white;
-    }
-    .hamburger span { width: 30px; height: 4px; background: white; }
-
-    .side-menu {
-        height: 100%; width: 250px; position: fixed;
-        z-index: 1999; top: 0; left: -250px;
-        background-color: rgba(0, 0, 0, 0.8);
-        transition: 0.5s; padding-top: 80px;
-    }
-    .side-menu.active { left: 0; }
-    .side-menu a {
-        padding: 15px 30px; text-decoration: none;
-        font-size: 1.1rem; color: #fff; display: block;
-        text-shadow: 2px 2px #000;
-    }
-    .side-menu a:hover { color: #ff00ff; }
-
+    /* Keep Game Container Styles */
     #flash-container {
       position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%);
@@ -48,33 +26,21 @@
       transform: translate(-50%, -50%);
       color: #fff; font-family: Arial; z-index: 1000;
     }
+
+    /* Ensure hamburger stays above Flash */
+    .hamburger { z-index: 999999 !important; }
+    .side-menu { z-index: 999998 !important; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@ruffle-rs/ruffle@0.2.0-nightly.2025.10.2/ruffle.min.js"></script>
 </head>
 <body>
 
-  <div class="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-  </div>
-
-  <div id="indexMenu" class="side-menu">
-      <a href="index.html">Home</a>
-      <a href="/bindingofisaacwotl.html">The Binding of Isaac</a>
-      <a href="/BTD5.html">BTD5</a>
-      <a href="/Gladihoppers.html">Gladihoppers</a>
-  </div>
-
   <div id="loading-text">Loading game... 0%</div>
   <div id="flash-container"></div>
 
   <script>
-    function toggleMenu() {
-        document.getElementById("indexMenu").classList.toggle("active");
-    }
-
-    // This is where we moved the external URL to
+    // --- GAME LOGIC (Keep this exactly as is) ---
     const GAME_BASE_URL = "https://cdn.jsdelivr.net/gh/bubbls/ugss@main/boilambeternal/";
-
     const container = document.getElementById("flash-container");
     const loadingText = document.getElementById("loading-text");
 
@@ -95,7 +61,6 @@
             resolve(URL.createObjectURL(mergedBlob));
             return;
           }
-          // We add the GAME_BASE_URL here specifically for the game files
           fetch(GAME_BASE_URL + fileParts[i]).then(r => {
             const len = r.headers.get('content-length');
             if (len) totalSize += parseInt(len);
@@ -147,5 +112,7 @@
       });
     });
   </script>
+
+  <script src="/menu.js?v=1"></script>
 </body>
 </html>
