@@ -3,11 +3,11 @@ const menuHTML = `
         <span></span><span></span><span></span>
     </div>
     <div id="indexMenu" class="side-menu">
-        <a href="/" style="--i:1">Home</a>
-        <span class="menu-item" style="--i:2">Binding of Isaac</span>
-        <span class="menu-item" style="--i:3">BTD5</span>
-        <span class="menu-item" style="--i:4">Gladihoppers</span>
-        <span class="menu-item" style="--i:5">Cookie Clicker</span>
+        <a href="/" style="--i:1" class="menu-btn">Home</a>
+        <button onclick="window.location.href='/bindingofisaacwotl.html'" style="--i:2" class="menu-btn">Binding of Isaac</button>
+        <button onclick="window.location.href='/BTD5.html'" style="--i:3" class="menu-btn">BTD5</button>
+        <button onclick="window.location.href='/Gladihoppers.html'" style="--i:4" class="menu-btn">Gladihoppers</button>
+        <button onclick="window.location.href='/cookieclicker.html'" style="--i:5" class="menu-btn">Cookie Clicker</button>
     </div>
 `;
 
