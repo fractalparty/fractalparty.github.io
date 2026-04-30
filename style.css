@@ -30,55 +30,60 @@
     width: auto;
     height: 100vh;
     padding-top: 100px;
-    pointer-events: none; /* Allows you to click the game background when menu is closed */
+    pointer-events: none; 
     display: flex;
     flex-direction: column;
 }
 
-/* Individual Items (Links and Game Names) */
-.side-menu a, .side-menu .menu-item {
+/* The Staircase Button Style */
+.menu-btn {
     display: block;
     color: white;
     text-decoration: none;
     font-size: 1.5rem;
+    font-family: inherit; /* Keeps your Brush Script font */
     padding: 12px 25px;
     background: rgba(0, 0, 0, 0.9);
     margin-bottom: 10px;
     border: 2px solid white;
     width: fit-content;
     white-space: nowrap;
+    cursor: pointer;
+    text-align: left;
     
-    /* Animation Start State */
+    /* Initial state for animation */
     transform: translateX(-200%);
     opacity: 0;
     
-    /* The "Stairs" calculation: moves each item 40px further right */
+    /* Diagonal Staircase offset */
     margin-left: calc(var(--i) * 40px);
     
-    /* Shoot-out transition with a slight "bounce" */
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+    /* Transition settings */
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                opacity 0.3s ease, 
+                background 0.2s ease, 
+                color 0.2s ease;
     transition-delay: calc(var(--i) * 0.1s);
 }
 
-/* When active, items shoot into view */
+/* Shooting out when menu is active */
 .side-menu.active {
     pointer-events: auto;
 }
 
-.side-menu.active a, .side-menu.active .menu-item {
+.side-menu.active .menu-btn {
     transform: translateX(20px);
     opacity: 1;
 }
 
-/* Distinct styling for the non-link items */
-.menu-item {
-    cursor: default;
-    border-style: dotted; /* Visual cue that it's just text */
-    color: #aaa;
+/* Hover Effect - Makes it feel like a button */
+.menu-btn:hover {
+    background: white !important;
+    color: black !important;
+    transform: translateX(30px) scale(1.05); /* Extra pop on hover */
 }
 
-/* Hover only for actual links */
-.side-menu a:hover {
-    background: white;
-    color: black;
+/* Active/Click effect */
+.menu-btn:active {
+    transform: translateX(25px) scale(0.95);
 }
