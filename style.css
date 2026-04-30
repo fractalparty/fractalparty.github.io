@@ -1,10 +1,8 @@
-/* style.css */
-
+/* Hamburger Button */
 .hamburger {
     position: fixed !important; 
     top: 20px !important; 
     left: 20px !important;
-    /* We use a massive number here to beat the game engines */
     z-index: 2147483647 !important; 
     cursor: pointer;
     display: flex;
@@ -16,20 +14,71 @@
     border: 2px solid white !important;
 }
 
-.side-menu {
-    height: 100% !important;
-    width: 250px !important;
-    position: fixed !important;
-    /* One level lower than the button but still higher than the game */
-    z-index: 2147483646 !important; 
-    top: 0;
-    left: -250px;
-    background-color: rgba(0, 0, 0, 0.9) !important; 
-    transition: 0.5s;
-    padding-top: 80px;
-    backdrop-filter: blur(10px);
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
 }
 
+/* Menu Container */
+.side-menu {
+    position: fixed !important;
+    z-index: 2147483646 !important; 
+    top: 0;
+    left: 0;
+    width: auto;
+    height: 100vh;
+    padding-top: 100px;
+    pointer-events: none; /* Allows you to click the game background when menu is closed */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Individual Items (Links and Game Names) */
+.side-menu a, .side-menu .menu-item {
+    display: block;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    padding: 12px 25px;
+    background: rgba(0, 0, 0, 0.9);
+    margin-bottom: 10px;
+    border: 2px solid white;
+    width: fit-content;
+    white-space: nowrap;
+    
+    /* Animation Start State */
+    transform: translateX(-200%);
+    opacity: 0;
+    
+    /* The "Stairs" calculation: moves each item 40px further right */
+    margin-left: calc(var(--i) * 40px);
+    
+    /* Shoot-out transition with a slight "bounce" */
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+    transition-delay: calc(var(--i) * 0.1s);
+}
+
+/* When active, items shoot into view */
 .side-menu.active {
-    left: 0 !important;
+    pointer-events: auto;
+}
+
+.side-menu.active a, .side-menu.active .menu-item {
+    transform: translateX(20px);
+    opacity: 1;
+}
+
+/* Distinct styling for the non-link items */
+.menu-item {
+    cursor: default;
+    border-style: dotted; /* Visual cue that it's just text */
+    color: #aaa;
+}
+
+/* Hover only for actual links */
+.side-menu a:hover {
+    background: white;
+    color: black;
 }
