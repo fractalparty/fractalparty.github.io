@@ -3,11 +3,11 @@ const menuHTML = `
         <span></span><span></span><span></span>
     </div>
     <div id="indexMenu" class="side-menu">
-        <a href="/">Home</a>
-        <a href="/bindingofisaacwotl.html">Binding of Isaac</a>
-        <a href="/BTD5.html">BTD5</a>
-        <a href="/Gladihoppers.html">Gladihoppers</a>
-        <a href="/cookieclicker.html">Cookie Clicker</a>
+        <a href="/" style="--i:1">Home</a>
+        <span class="menu-item" style="--i:2">Binding of Isaac</span>
+        <span class="menu-item" style="--i:3">BTD5</span>
+        <span class="menu-item" style="--i:4">Gladihoppers</span>
+        <span class="menu-item" style="--i:5">Cookie Clicker</span>
     </div>
 `;
 
@@ -20,7 +20,7 @@ function toggleMenu() {
 document.addEventListener('click', (e) => {
     const menu = document.getElementById("indexMenu");
     const btn = document.querySelector('.hamburger');
-    if (menu.classList.contains('active') && !menu.contains(e.target) && !btn.contains(e.target)) {
+    if (menu && menu.classList.contains('active') && !menu.contains(e.target) && !btn.contains(e.target)) {
         menu.classList.remove("active");
     }
 });
