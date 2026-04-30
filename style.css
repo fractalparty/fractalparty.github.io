@@ -87,3 +87,17 @@
 .menu-btn:active {
     transform: translateX(25px) scale(0.95);
 }
+/* Force the game/iframe to stay behind the menu */
+iframe, canvas, embed, object {
+    position: relative;
+    z-index: 1 !important;
+}
+
+/* Ensure the hamburger and menu are at the absolute top */
+.hamburger {
+    z-index: 2147483647 !important; /* Max possible z-index */
+}
+
+.side-menu {
+    z-index: 2147483646 !important;
+}
