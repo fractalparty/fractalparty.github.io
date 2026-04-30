@@ -28,8 +28,16 @@
     <h1>Party World</h1>
 
     <script>
-        // Random Background logic
-        const backgrounds = ['024.GIF', '058.GIF', '061.GIF', '062.GIF', '067.GIF', '083.GIF', '087.GIF', '1008.GIF', '1019.GIF', '1020.GIF', '114.GIF', '336.GIF', '646.GIF', '650.GIF', 'pdj50131.gif', 'pdj50138.gif', 'rainbowstr.gif', 'BUILD063.png', 'BUILD233.png', 'Painting.png', 'WINDOW14.png', 'EARTH_C.JPG', 'OPOCEAN2.JPG', 'PLANTS3.JPG', 'SD175.JPG', 'ahm60071.jpg', 'bubblespurplebg.jpg', 'cio61007.jpg', 'coins.jpg', 'giraffe195.jpg', 'manyfish.jpg', 'pasta1.jpg', 'pdk50102.jpg', 'qcu50119.jpg', 'qcu50122.jpg', 'qhk50103.jpg', 'water1_ripple.jpg'];
+        // Updated with exact file names from your GitHub backgrounds folder
+        const backgrounds = [
+            '024.GIF', '058.GIF', '061.GIF', '062.GIF', '067.GIF', '083.GIF', '087.GIF', 
+            '1008.GIF', '1019.GIF', '1020.GIF', '114.GIF', '336.GIF', '646.GIF', '650.GIF', 
+            'BUILD063.PNG', 'BUILD233.PNG', 'EARTH_C.JPG', 'OPOCEAN2.JPG', 'PLANTS3.JPG', 
+            'Painting.png', 'SD175.JPG', 'WINDOW14.png', 'ahm60071.jpg', 'bubblespurplebg.jpg', 
+            'cio61007.jpg', 'coins.jpg', 'giraffe195.jpg', 'manyfish.jpg', 'pasta1.jpg', 
+            'pdj50131.gif', 'pdj50138.gif', 'pdk50102.jpg', 'qcu50119.jpg', 'qcu50122.jpg', 
+            'qhk50103.jpg', 'rainbowstr.gif', 'water1_ripple.jpg'
+        ];
         const selectedImage = backgrounds[Math.floor(Math.random() * backgrounds.length)];
         document.body.style.backgroundImage = `url('backgrounds/${selectedImage}')`;
     </script>
