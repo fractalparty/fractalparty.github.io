@@ -12,42 +12,32 @@
     <style>
         html, body {
             margin: 0; padding: 0;
-            background: black !important; /* Force black background */
+            background: black !important;
             overflow: hidden;
             height: 100%; width: 100%;
         }
 
-        /* Unity specific styles */
         #unity-container { width: 75%; height: 75%; }
 
-        /* Force the shared menu to stay on top of Unity and Poki loaders */
-        .hamburger { 
-            z-index: 99999999 !important; 
+        /* Force your menu classes to violently stay on top of everything */
+        .hamburger, [class*="hamburger"], #hamburger-button { 
+            z-index: 2147483647 !important; /* Maximum possible 32-bit integer z-index */
             position: fixed !important; 
             display: block !important; 
             visibility: visible !important;
             opacity: 1 !important;
         }
-        .side-menu { 
-            z-index: 99999998 !important; 
+        .side-menu, [class*="side-menu"] { 
+            z-index: 2147483646 !important; 
             position: fixed !important; 
         }
 
-        /* DESTROY THE POKI BLUE LOADER BACKGROUND & OVERLAYS */
-        #poki-sdk-container, 
-        div[class*="poki"], 
-        div[id*="poki"],
-        div[style*="background-color"][style*="position: fixed"] {
+        /* Generic cleanup rules targeting any potential background blocks Poki uses */
+        #poki-sdk-container, #poki-sdk-root, .poki-sdk-container,
+        div[class*="poki"], div[id*="poki"], 
+        div[style*="background-color: rgb(0,"] {
             background: transparent !important;
             background-color: transparent !important;
-            pointer-events: none; /* Allows clicks to pass through invisible leftover overlays */
-        }
-
-        /* If Poki injects a specific splash wrapper blocking the screen, this neutralizes it */
-        .poki-loader, #poki-loader {
-            display: none !important;
-            visibility: hidden !important;
-            background: none !important;
         }
     </style>
 
@@ -85,7 +75,51 @@
 <body>
 
     <script src="patch/js/poki-master-loader.js"></script>
-
     <script src="/menu.js?v=1"></script>
+
+    <script>
+        // 1. Max out z-index on the absolute maximum value
+        const forceMenuToTop = () => {
+            const menuElements = document.querySelectorAll('.hamburger, .side-menu, [class*="hamburger"]');
+            menuElements.forEach(el => {
+                el.style.setProperty('z-index', '2147483647', 'important');
+                el.style.setProperty('position', 'fixed', 'important');
+                el.style.setProperty('display', 'block', 'important');
+                el.style.setProperty('visibility', 'visible', 'important');
+                el.style.setProperty('opacity', '1', 'important');
+            });
+
+            // Find any heavy blue/colored background screens injected by Poki and clear them out
+            const blueBlockers = document.querySelectorAll('div[style*="position: absolute"], div[style*="position: fixed"]');
+            blueBlockers.forEach(div => {
+                const bg = div.style.backgroundColor || '';
+                // Checks if it's not our components and has a solid background blocking the app
+                if (!div.classList.contains('hamburger') && !div.classList.contains('side-menu') && (bg.includes('rgb') || bg.includes('#'))) {
+                    // Turn it transparent and stop it from blocking clicks
+                    div.style.setProperty('background', 'transparent', 'important');
+                    div.style.setProperty('background-color', 'transparent', 'important');
+                    div.style.setProperty('pointer-events', 'none', 'important');
+                }
+            });
+        };
+
+        // Run immediately
+        forceMenuToTop();
+
+        // 2. Continually watch the page for changes (handles lagging script injections)
+        const observer = new MutationObserver((mutations) => {
+            forceMenuToTop();
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['style', 'class']
+        });
+
+        // Run one last time when loading finishes
+        window.addEventListener('load', forceMenuToTop);
+    </script>
 </body>
 </html>
